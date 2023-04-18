@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/list" mode="ios"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClick()">
+        <ion-icon slot="start" [name]="favorito?'heart':'heart-outline'" color="danger"></ion-icon>
+        <!-- Click me -->
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container {{details?.background}}">
+    <section class="ion-padding-vertical">
+      <div style="display: flex;justify-content: space-between;color:#fff;" class="ion-padding-horizontal">
+        <h1 class="ion-text-uppercase">{{details?.name}}</h1>
+        <h2># {{details?.id}}</h2>
+      </div>
+      <div class="ion-padding-horizontal types">
+        <span style="color:#fff;" *ngFor="let t of details?.types">{{t.type.name}}</span>
+      </div>
+      <div *ngIf="details">
+        <ion-img src="{{imgUrl}}{{details.id}}.svg" style="height:200px;"></ion-img>
+      </div>
+    </section>
+
+    <div class="content">
+      <nav>
+        <a (click)="selectOption(1)" [ngClass]="optionSelected === 1 ? 'bold' : ''">About</a>
+        <a (click)="selectOption(2)" [ngClass]="optionSelected === 2 ? 'bold' : ''">Base Stats</a>
+        <a (click)="selectOption(3)" [ngClass]="optionSelected === 3 ? 'bold' : ''">Evolution</a>
+        <a (click)="selectOption(4)" [ngClass]="optionSelected === 4 ? 'bold' : ''">Moves</a>
+      </nav>
+
+      <div *ngIf="optionSelected === 1">
+        <ion-grid fixed class="ion-margin-top">
+          <ion-row>
+            <ion-col size="6">Height</ion-col>
+            <ion-col size="6">{{details?.height/10}} m</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">Weight</ion-col>
+            <ion-col size="6">{{details?.weight/10}} kg</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">Abilities</ion-col>
+            <ion-col size="6">
+              <span *ngFor="let a of details?.abilities; let isLast = last;" class="ion-text-capitalize detail">
+                {{a.ability.name}}{{!isLast?',':''}}
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div *ngIf="optionSelected === 2">
+        <ion-grid fixed class="ion-margin-top">
+          <ion-row *ngFor="let s of details?.stats">
+            <ion-col size="6">
+              <span class="ion-text-capitalize stat-name">{{s.stat.name}}</span>
+            </ion-col>
+            <ion-col size="6">
+              <span class="stat-cant">{{s.base_stat}}%</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div *ngIf="optionSelected === 3">
+        EVOLUTION
+      </div>
+      <div *ngIf="optionSelected === 4">
+        MOVES
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border" ino>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" mode="ios"></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-vertical ion-padding-horizontal">
+  <ion-text color="medium">
+    <h1 class="ion-padding-horizontal title">Pokedex</h1>
+  </ion-text>
+  <ion-grid fixed>
+    <ion-row class="row ion-padding-horizontal">
+      <ion-col class="{{pokemon.background}} rounded" size="5.9" size-lg="2" *ngFor="let pokemon of pokemonList"
+        routerLink="/details/{{pokemon.pokeIndex}}">
+        <ion-text color="primary" class="ion-text-capitalize">
+          <h5 style="color:#fff;">{{pokemon.name}}</h5>
+        </ion-text>
+        <div class="container">
+          <div class="type__container">
+            <small *ngFor="let t of pokemon.types" class="ion-text-capitalize">
+              <ion-text style="color: #fff;">
+                <!-- {{t.type.name}} -->
+              </ion-text>
+            </small>
+          </div>
+          <ion-img [src]="pokemon.image" style="width: 100%;height: auto;"></ion-img>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" position="bottom" (ionInfinite)="loadPokemon(true,$event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more pokemons...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
