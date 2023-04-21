@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="container {{details?.background}}">
+  <div class="container" [ngClass]="details?.background">
     <section class="ion-padding-vertical">
       <div style="display: flex;justify-content: space-between;color:#fff;" class="ion-padding-horizontal">
         <h1 class="ion-text-uppercase">{{details?.name}}</h1>
@@ -24,16 +24,17 @@
         <span style="color:#fff;" *ngFor="let t of details?.types">{{t.type.name}}</span>
       </div>
       <div *ngIf="details">
-        <ion-img src="{{imgUrl}}{{details.id}}.svg" style="height:200px;"></ion-img>
+        <ion-img [src]="imgUrl+details.id+'.svg'" style="height:200px;"></ion-img>
       </div>
     </section>
 
     <div class="content">
       <nav>
-        <a (click)="selectOption(1)" [ngClass]="optionSelected === 1 ? 'bold' : ''">About</a>
-        <a (click)="selectOption(2)" [ngClass]="optionSelected === 2 ? 'bold' : ''">Base Stats</a>
-        <a (click)="selectOption(3)" [ngClass]="optionSelected === 3 ? 'bold' : ''">Evolution</a>
-        <a (click)="selectOption(4)" [ngClass]="optionSelected === 4 ? 'bold' : ''">Moves</a>
+        <a class="cursor-pointer" (click)="selectOption(1)" [ngClass]="optionSelected === 1 ? 'bold' : ''">About</a>
+        <a class="cursor-pointer" (click)="selectOption(2)" [ngClass]="optionSelected === 2 ? 'bold' : ''">Base
+          Stats</a>
+        <a class="cursor-pointer" (click)="selectOption(3)" [ngClass]="optionSelected === 3 ? 'bold' : ''">Evolution</a>
+        <a class="cursor-pointer" (click)="selectOption(4)" [ngClass]="optionSelected === 4 ? 'bold' : ''">Moves</a>
       </nav>
 
       <div *ngIf="optionSelected === 1">
