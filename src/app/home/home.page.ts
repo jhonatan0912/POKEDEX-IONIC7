@@ -11,9 +11,4 @@ import { IonicModule } from '@ionic/angular';
 })
 export class HomePage {
   constructor() { }
-
-  buttonCliked() {
-    console.log("Button clicked");
-
-  }
 }
